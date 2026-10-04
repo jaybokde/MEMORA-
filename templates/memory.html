@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Memory - MEMORA</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>My Memory</h1>
+
+        <section>
+
+            <h2>📌 Tasks</h2>
+
+            <div id="tasks"></div>
+
+        </section>
+
+        <section>
+
+            <h2>📅 Events</h2>
+
+            <div id="events"></div>
+
+        </section>
+
+        <section>
+
+            <h2>🧠 Memories</h2>
+
+            <div id="memories"></div>
+
+        </section>
+
+        <a href="/">
+            ← Back to Home
+        </a>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

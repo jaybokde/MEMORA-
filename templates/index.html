@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MEMORA — Personal AI Memory</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🧠
+        </div>
+
+        MEMORA
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/capture">
+            Remember
+        </a>
+
+        <a href="/ask">
+            Ask
+        </a>
+
+        <a href="/memory">
+            Memory
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-badge">
+            ✨ Your Personal AI Memory
+        </div>
+
+
+        <h1>
+            Don't Let Important
+            <span>Things Get Lost.</span>
+        </h1>
+
+
+        <p>
+            MEMORA helps you capture your thoughts,
+            remember important information, manage tasks,
+            and find your memories whenever you need them.
+        </p>
+
+    </section>
+
+
+
+    <!-- ACTIONS -->
+
+    <section class="actions">
+
+
+        <a
+            href="/capture"
+            class="action-card"
+        >
+
+            <div class="action-icon">
+                📝
+            </div>
+
+            <h3>
+                Remember Something
+            </h3>
+
+            <p>
+                Tell MEMORA about a task,
+                event, idea, or personal memory.
+            </p>
+
+        </a>
+
+
+
+        <a
+            href="/ask"
+            class="action-card"
+        >
+
+            <div class="action-icon">
+                💬
+            </div>
+
+            <h3>
+                Ask MEMORA
+            </h3>
+
+            <p>
+                Ask questions about your saved
+                memories, tasks, and events.
+            </p>
+
+        </a>
+
+
+
+        <a
+            href="/memory"
+            class="action-card"
+        >
+
+            <div class="action-icon">
+                🧠
+            </div>
+
+            <h3>
+                My Memory
+            </h3>
+
+            <p>
+                View everything MEMORA has
+                remembered for you.
+            </p>
+
+        </a>
+
+
+
+        <a
+            href="/capture"
+            class="action-card"
+        >
+
+            <div class="action-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Quick Capture
+            </h3>
+
+            <p>
+                Quickly save a thought before
+                you forget it.
+            </p>
+
+        </a>
+
+    </section>
+
+
+
+    <!-- STATS -->
+
+    <h2 class="section-title">
+        Your MEMORA
+    </h2>
+
+
+    <section class="stats">
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                ✅
+            </div>
+
+            <div
+                class="stat-number"
+                id="task-count"
+            >
+                —
+            </div>
+
+            <div class="stat-label">
+                Tasks
+            </div>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                📅
+            </div>
+
+            <div
+                class="stat-number"
+                id="event-count"
+            >
+                —
+            </div>
+
+            <div class="stat-label">
+                Events
+            </div>
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <div class="stat-icon">
+                💭
+            </div>
+
+            <div
+                class="stat-number"
+                id="memory-count"
+            >
+                —
+            </div>
+
+            <div class="stat-label">
+                Memories
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        🧠 MEMORA
+        <br>
+        Your thoughts. Your memories. Your AI.
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+async function loadStats() {
+
+    try {
+
+        const response =
+            await fetch("/api/memory");
+
+        const data =
+            await response.json();
+
+
+        if (data.success) {
+
+            document.getElementById("task-count")
+                .textContent =
+                data.tasks.length;
+
+
+            document.getElementById("event-count")
+                .textContent =
+                data.events.length;
+
+
+            document.getElementById("memory-count")
+                .textContent =
+                data.memories.length;
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Could not load MEMORA statistics."
+        );
+
+    }
+
+}
+
+
+loadStats();
+
+</script>
+
+
+</body>
+
+</html>

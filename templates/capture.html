@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Capture - MEMORA</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Capture Thought</h1>
+
+        <p>
+            Tell MEMORA what's on your mind.
+        </p>
+
+        <textarea
+            id="thought"
+            placeholder="Type your thought here..."
+        ></textarea>
+
+        <button onclick="saveThought()">
+            Save to MEMORA
+        </button>
+
+        <p id="status"></p>
+
+        <a href="/">
+            ← Back to Home
+        </a>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

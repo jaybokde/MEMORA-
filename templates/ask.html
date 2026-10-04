@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ask MEMORA</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            color: #1e293b;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            font-size: 34px;
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25);
+        }
+
+        h1 {
+            margin-top: 15px;
+            font-size: 34px;
+            color: #111827;
+        }
+
+        .tagline {
+            margin-top: 8px;
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        /* ASK CARD */
+
+        .ask-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 15px 45px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .ask-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 130px;
+            resize: vertical;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        /* BUTTON */
+
+        .ask-button {
+            width: 100%;
+            margin-top: 15px;
+            padding: 15px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .ask-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        .ask-button:active {
+            transform: translateY(0);
+        }
+
+        /* ANSWER */
+
+        #answer {
+            margin-top: 25px;
+        }
+
+        .answer-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .answer-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #4f46e5;
+        }
+
+        /* QUICK QUESTIONS */
+
+        .quick-card {
+            margin-top: 20px;
+            background: white;
+            border-radius: 22px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .quick-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .question-button {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #334155;
+            padding: 10px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .question-button:hover {
+            background: #eef2ff;
+            border-color: #6366f1;
+            color: #4f46e5;
+        }
+
+        /* BACK BUTTON */
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .ask-card {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .questions {
+                flex-direction: column;
+            }
+
+            .question-button {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="logo">
+                🧠
+            </div>
+
+            <h1>Ask MEMORA</h1>
+
+            <p class="tagline">
+                Your personal AI memory assistant
+            </p>
+
+        </div>
+
+
+        <!-- ASK -->
+
+        <div class="ask-card">
+
+            <div class="ask-title">
+                💬 What would you like to know?
+            </div>
+
+            <textarea
+                id="question"
+                placeholder="Ask something like: What do I need to do tomorrow?"
+            ></textarea>
+
+            <button
+                class="ask-button"
+                onclick="askMemora()"
+            >
+                ✨ Ask MEMORA
+            </button>
+
+            <div id="answer"></div>
+
+        </div>
+
+
+        <!-- QUICK QUESTIONS -->
+
+        <div class="quick-card">
+
+            <h3>⚡ Quick Questions</h3>
+
+            <div class="questions">
+
+                <button
+                    class="question-button"
+                    onclick="setQuestion('What do I need to do tomorrow?')"
+                >
+                    📅 What do I need to do tomorrow?
+                </button>
+
+                <button
+                    class="question-button"
+                    onclick="setQuestion('What is my favorite subject?')"
+                >
+                    🧠 What is my favorite subject?
+                </button>
+
+                <button
+                    class="question-button"
+                    onclick="setQuestion('What tasks do I have?')"
+                >
+                    ✅ What tasks do I have?
+                </button>
+
+                <button
+                    class="question-button"
+                    onclick="setQuestion('What events are coming up?')"
+                >
+                    📆 What events are coming up?
+                </button>
+
+                <button
+                    class="question-button"
+                    onclick="setQuestion('What do you remember about me?')"
+                >
+                    💭 What do you remember about me?
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- BACK -->
+
+        <div class="back">
+
+            <a href="/">
+                ← Back to MEMORA
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function setQuestion(question) {
+
+            document.getElementById("question").value = question;
+
+            document.getElementById("question").focus();
+
+        }
+
+
+        async function askMemora() {
+
+            const question =
+                document.getElementById("question").value.trim();
+
+            const answer =
+                document.getElementById("answer");
+
+
+            if (!question) {
+
+                answer.innerHTML = `
+                    <div class="answer-box">
+                        Please enter a question first.
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            answer.innerHTML = `
+                <div class="answer-box">
+                    <div class="answer-title">
+                        🧠 MEMORA is thinking...
+                    </div>
+                    Please wait a moment.
+                </div>
+            `;
+
+
+            try {
+
+                const response = await fetch(
+                    "/api/ask",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            question: question
+                        })
+                    }
+                );
+
+
+                const data = await response.json();
+
+
+                if (data.success) {
+
+                    answer.innerHTML = `
+                        <div class="answer-box">
+                            <div class="answer-title">
+                                🧠 MEMORA
+                            </div>
+
+                            ${data.answer}
+                        </div>
+                    `;
+
+                } else {
+
+                    answer.innerHTML = `
+                        <div class="answer-box">
+                            ❌ ${data.error}
+                        </div>
+                    `;
+
+                }
+
+            } catch (error) {
+
+                answer.innerHTML = `
+                    <div class="answer-box">
+                        ❌ Unable to connect to MEMORA.
+                    </div>
+                `;
+
+                console.error(error);
+
+            }
+
+        }
+
+
+        // Press Enter + Ctrl to ask
+        document
+            .getElementById("question")
+            .addEventListener("keydown", function(event) {
+
+                if (event.ctrlKey && event.key === "Enter") {
+
+                    askMemora();
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
